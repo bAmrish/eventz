@@ -1,6 +1,14 @@
 <h2> Available Events</h2>
+<div> Select your favorite one </div>
 <ul>
-<% @events.each do |event| %>  
-  <li><%= event %></li>
-<% end %>
+  <% @events.each do |event| %>  
+    <li>
+      <p>
+        <strong><%= event.name%> at <%= event.location%> </strong>
+        : <%=price(event)%>
+        <p> <%= event.description.truncate(35, separator: ' ')%> </p>
+        <p> <em>Starts At:</em> <%= date_and_time(event)%> </p>
+      </p>
+    </li>
+  <% end %>
 </ul>
