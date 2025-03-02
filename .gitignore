@@ -38,3 +38,6 @@
 .vscode/
 .idea/
 *.iml
+
+# OS Temp files
+.DS_Store
