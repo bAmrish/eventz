@@ -6,12 +6,18 @@
     <h1><%= @event.name %></h1>
     <h2><%= pluralize(@event.capacity, "spot") %> &bull; <%= price(@event) %></h2>
     <h2>
-      <%= date_and_time(@event)%> in <%= @event.location%>
+      <%= date_and_time(@event) %> in <%= @event.location %>
     </h2>
     <p>
-      <%= @event.description%>
+      <%= @event.description %>
     </p>
+    <div class="register">
+      <p>
+        <%= link_to "Who's Registered?", event_registrations_path(@event) %>
+      </p>
+    </div>
   </div>
+  
 </section>
 
 <section class="admin">
