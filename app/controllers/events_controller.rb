@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
+      flash[:notice] = 'Event updated successfully!'
       redirect_to @event
     else
       render :edit, status: :unprocessable_entity
@@ -28,7 +29,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
 
     if @event.save
-      redirect_to @event
+      redirect_to @event, notice: "Event created successfully!"
     else
       render :new, status: :unprocessable_entity
     end
