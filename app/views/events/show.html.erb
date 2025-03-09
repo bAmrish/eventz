@@ -13,7 +13,7 @@
     </p>
     <div class="register">
       <p>     
-        <%= link_to "Register!", new_event_registration_path(@event), class:"register"%>
+        <%= register_or_sold_out @event%>
       </p>
       <p>
         <%= link_to "Who's Registered?", event_registrations_path(@event) %>
