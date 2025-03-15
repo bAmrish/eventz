@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   
   has_many :registrations, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   validates :name, presence: true
   validates :location, presence: true
