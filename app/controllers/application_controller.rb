@@ -13,7 +13,9 @@ private
     return current_user == user
   end
 
-  helper_method :current_user, :is_logged_in?, :is_current_user?
+  def current_user_admin?
+    return current_user && current_user.admin?
+  end
 
   def require_signin
     unless is_logged_in?
@@ -21,4 +23,12 @@ private
       redirect_to login_path, notice: 'You need to be logged in!'
     end
   end
+
+  def require_admin
+    unless current_user_admin?
+      redirect_to root_url, alert: "Unauthorized!"
+    end
+  end
+
+  helper_method :current_user, :is_logged_in?, :is_current_user?, :current_user_admin?
 end

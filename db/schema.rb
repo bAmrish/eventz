@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_12_161127) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_15_090445) do
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "string"
@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_12_161127) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin", default: false
   end
 
   add_foreign_key "registrations", "events"
