@@ -10,6 +10,8 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @likers = @event.likers
+    @categories = @event.categories
+    
     if is_logged_in?
       @like = current_user.likes.find_by(event: @event)
     end
