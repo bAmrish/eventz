@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def show
     user_id = params[:id]
     @user = User.find(user_id)
+    @liked_events = @user.liked_events
   end
 
   def new
