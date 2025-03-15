@@ -16,12 +16,11 @@ class Event < ApplicationRecord
       message: 'must be a JPG or a PNG image'
   }
 
-  # Get all the upcoming events 
-  # ordered in ascending order of when they are starting
-  def self.upcoming
-    where("starts_at > ?", Time.now).order("starts_at")  
-  end
-
+  scope :upcoming, -> {where("starts_at >= ?", Time.now).order("starts_at")}
+  scope :past, -> {where("starts_at <= ?", Time.now).order("starts_at")}
+  scope :free, -> {past.where(price: 0.0).order(:name)}
+  scope :recent, -> (max = 3) {past.limit(max)}
+  
   def free?
     return price.blank? || price.zero?
   end
