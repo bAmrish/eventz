@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    
+    session.delete(:user_id)
+    redirect_to events_path, status: :see_other, notice: 'You have been logged out successfully!'
   end
 end

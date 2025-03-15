@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   resources :users
 
   get 'signup' => 'users#new'
+  delete 'logout' => 'sessions#destroy'
 
 end
