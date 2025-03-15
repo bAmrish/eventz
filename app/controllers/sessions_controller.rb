@@ -10,7 +10,9 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: email)
     if @user && @user.authenticate(password)
       session[:user_id] = @user.id
-      redirect_to @user, notice: "Welcome Back #{@user.name}!"
+      redirect_url = session[:intended_url] || @user
+      redirect_to redirect_url, notice: "Welcome Back #{@user.name}!"
+      session.delete(:intended_url)
     else
       flash.now[:alert] = 'Invalid email or password!'
       render :new, status: :unprocessable_entity
