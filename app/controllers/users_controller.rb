@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
-  before_action :require_signin, except: [:new, :create]
   
+  before_action :require_signin, except: [:new, :create]
+  before_action :set_user_from_request, only: [:edit, :update, :destroy]
+  before_action :require_current_user, only: [:edit, :update, :destroy]
+
   def index
     @users = User.all
   end
@@ -25,14 +28,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    id= params[:id]
-    @user = User.find(id)
   end
 
-  def update
-    id = params[:id]
-    @user = User.find(id)
-    
+  def update    
     if @user.update(user_params)
       redirect_to @user, notice: 'Profile is updated successfully!'
     else
@@ -41,7 +39,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     session.delete(:user_id)
     redirect_to events_url, status: :see_other, alert: 'Account deleted successfully!'
@@ -50,5 +47,13 @@ class UsersController < ApplicationController
 private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def set_user_from_request
+    @user = User.find(params[:id])
+  end
+
+  def require_current_user
+    redirect_to events_url, alert: 'Unauthorized!' unless is_current_user?(@user)
   end
 end
