@@ -2,10 +2,10 @@
 <%= form_with(model: [@event, @registration]) do |f| %>
   <%= render "shared/errors", object: @registration %>
   <%= f.label :name %>
-  <%= f.text_field :name %>  
+  <%= f.text_field :name, value: @registration.user.name, disabled: true %>  
   
   <%= f.label :email %>
-  <%= f.text_field :email %>  
+  <%= f.text_field :email, value: @registration.user.email, disabled: true %>  
 
   <%= f.label :how_heard %>
   <%= f.select :how_heard, Registration::HOW_HEARD_OPTIONS, prompt: "Select" %>  
