@@ -1,16 +1,17 @@
 class Event < ApplicationRecord
-  
+  before_save :set_slug
+
   has_many :registrations, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
   has_many :event_categories, dependent: :destroy
   has_many :categories, through: :event_categories
   
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :location, presence: true
-  validates :description, length: {minimum: 25}
-  validates :price, numericality: {greater_than_or_equal_to: 0}
-  validates :capacity, numericality: {only_integer: true, greater_than: 0}
+  validates :description, length: { minimum: 25 }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :capacity, numericality: { only_integer: true, greater_than: 0 }
   validates :image_file_name, format: {
       with: /\w+\.(jpg|png)\z/i,
       message: 'must be a JPG or a PNG image'
@@ -27,5 +28,13 @@ class Event < ApplicationRecord
 
   def sold_out?
     capacity <= registrations.size
+  end
+
+  def to_param
+    slug
+  end
+private
+  def set_slug
+    self.slug = name.parameterize
   end
 end
