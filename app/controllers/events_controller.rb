@@ -63,7 +63,7 @@ private
     params.require(:event)
       .permit(
         :name, :description, :location, :price, 
-        :starts_at, :image_file_name, :capacity, 
+        :starts_at, :capacity, 
         category_ids: []
       )
   end

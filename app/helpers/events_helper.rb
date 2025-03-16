@@ -10,4 +10,8 @@ module EventsHelper
   def date_and_time(event)
     event.starts_at.strftime("%B %e, %Y %I:%M %P")
   end
+
+  def main_image(event)
+    image_tag "placeholder.png"
+  end
 end

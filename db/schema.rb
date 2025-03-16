@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_15_235641) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_16_081259) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -35,7 +35,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_15_235641) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.datetime "starts_at"
-    t.string "image_file_name", default: "placeholder.png"
     t.integer "capacity", default: 1
     t.string "slug"
   end
