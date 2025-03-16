@@ -6,6 +6,8 @@ class Event < ApplicationRecord
   has_many :likers, through: :likes, source: :user
   has_many :event_categories, dependent: :destroy
   has_many :categories, through: :event_categories
+
+  has_one_attached :main_image
   
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :location, presence: true

@@ -12,6 +12,10 @@ module EventsHelper
   end
 
   def main_image(event)
-    image_tag "placeholder.png"
+    if event.main_image.attached?
+      image_tag event.main_image
+    else
+      image_tag "placeholder.png"
+    end
   end
 end
